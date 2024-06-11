@@ -1,12 +1,10 @@
 import { Routes } from '@angular/router';
-import { MainComponent } from './views/main/main.component';
+import { SpotComponent } from './views/spot/spot.component';
 import { FuturesComponent } from './views/futures/futures.component';
 
 export const routes: Routes = [
-	{
-		path: '', component: MainComponent
-	},
-	{
-		path: 'futures', component: FuturesComponent
-	}
+	{ path: 'spot', component: SpotComponent },
+	{ path: 'futures', component: FuturesComponent },
+	{ path: '', redirectTo: '/spot', pathMatch: 'full' }, // redirect to spot for base route
+	{ path: '**', redirectTo: '/spot', pathMatch: 'full' }, // redirect to spot -> wildcard
 ];

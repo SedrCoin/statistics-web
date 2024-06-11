@@ -5,16 +5,16 @@ import { MESSAGE_STORAGE } from '../../models/storage';
 import { TableComponent } from '../table/table.component';
 
 @Component({
-	selector: 'app-main',
+	selector: 'app-spot',
 	standalone: true,
-	templateUrl: './main.component.html',
+	templateUrl: './spot.component.html',
 	imports: [
 		ReactiveFormsModule,
 		TableComponent
 	],
-	styleUrl: './main.component.scss'
+	styleUrl: './spot.component.scss'
 })
-export class MainComponent implements OnInit {
+export class SpotComponent implements OnInit {
 	public isInfo = false;
 
 	public diffForm: FormGroup;
