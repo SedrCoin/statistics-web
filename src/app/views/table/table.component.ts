@@ -3,8 +3,9 @@ import { IWSLOG } from '../../models/models';
 
 @Component({
 	selector: 'app-table',
+	standalone: true,
 	templateUrl: './table.component.html',
-	styleUrls: ['./table.component.scss']
+	styleUrl: './table.component.scss'
 })
 export class TableComponent {
 	@Input() public logs: IWSLOG[] = [];

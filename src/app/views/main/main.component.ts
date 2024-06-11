@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { WsSpotService } from '../../services/ws-spot.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MESSAGE_STORAGE } from '../../models/storage';
+import { TableComponent } from '../table/table.component';
 
 @Component({
 	selector: 'app-main',
+	standalone: true,
 	templateUrl: './main.component.html',
-	styleUrls: ['./main.component.scss']
+	imports: [
+		ReactiveFormsModule,
+		TableComponent
+	],
+	styleUrl: './main.component.scss'
 })
 export class MainComponent implements OnInit {
 	public isInfo = false;

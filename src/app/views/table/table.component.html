@@ -8,16 +8,19 @@
 		<th>Actions</th>
 	</tr>
 
-	<tr *ngFor="let log of logs">
-		<td>
-			<a [href]="'https://www.binance.com/en/trade/' + log.symbol + '?type=spot'" target="_blank">{{log.symbol}}</a>
-		</td>
-		<td>{{log.priceChanged}}</td>
-		<td>{{log.diff}}</td>
-		<td>{{log.interval}} seconds</td>
-		<td>{{log.time}}</td>
-		<td>
-			<button class="btn">🗑️</button>
-		</td>
-	</tr>
+	@for (log of logs; track log) {
+		<tr>
+			<td>
+				<a [href]="'https://www.binance.com/en/trade/' + log.symbol + '?type=spot'" target="_blank">{{log.symbol}}</a>
+			</td>
+			<td>{{log.priceChanged}}</td>
+			<td>{{log.diff}}</td>
+			<td>{{log.interval}} seconds</td>
+			<td>{{log.time}}</td>
+			<td>
+				<button class="btn">🗑️</button>
+			</td>
+		</tr>
+	}
+
 </table>

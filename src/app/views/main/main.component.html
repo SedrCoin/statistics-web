@@ -11,9 +11,13 @@
 		</div>
 	</form>
 
-	<div *ngIf="isInfo" class="info">
-		<p>Diff: {{diff}} %, Time: {{time}}s</p>
-	</div>
+	@if (isInfo) {
+		<div class="info">
+			<p>Diff: {{diff}} %, Time: {{time}}s</p>
+		</div>
+	}
 
-	<app-table *ngIf="MESSAGE_STORAGE.length" [logs]="MESSAGE_STORAGE"></app-table>
+	@if (MESSAGE_STORAGE.length) {
+		<app-table [logs]="MESSAGE_STORAGE"></app-table>
+	}
 </main>
