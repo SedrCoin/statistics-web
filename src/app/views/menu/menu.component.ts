@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 export enum MarketTypeEnum {
 	SPOT = 'Spot',
@@ -17,10 +17,5 @@ export enum MarketTypeEnum {
 	styleUrl: './menu.component.scss'
 })
 export class MenuComponent {
-	public currentRoute = MarketTypeEnum.SPOT;
-
-	constructor(router: Router) {
-	}
-
 	protected readonly MarketTypeEnum = MarketTypeEnum;
 }
