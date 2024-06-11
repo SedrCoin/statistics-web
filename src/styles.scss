@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	background-color: black;
+	color: white;
+	box-sizing: border-box;
+}
+
+.btn {
+	width: 150px;
+	height: 45px;
+	border-radius: 8px;
+	border: none;
+	background-color: #444141;
+	cursor: pointer;
+	color: white;
+}
+
+.input {
+	border: none;
+	background-color: #a9a9a9;
+	border-radius: 12px;
+	height: 40px;
+	width: 300px;
+	padding: 12px;
+	-moz-appearance: textfield;
+}
+

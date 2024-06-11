@@ -1,0 +1,32 @@
+<main class="main">
+	<h1>Websocket launcher SPOT</h1>
+
+	<form [formGroup]="diffForm" class="userInput">
+
+		<input class="input" formControlName="diff" id="diff-input" placeholder="Type diff" type="number">
+		<input class="input" formControlName="time" id="time-input" placeholder="Type time" type="number">
+
+		<div class="btn-wrapper">
+			<button (click)="startWs()" class="btn submit-btn" type="button"> Lunch Websocket</button>
+			<button (click)="stopWs()" class="btn stop-btn" type="button"> Stop Websocket</button>
+		</div>
+
+
+		<div *ngIf="isInfo" class="info">
+			<p> Diff:  {{diff}}%, Time: {{time}}s </p>
+		</div>
+
+		<div *ngFor="let message of MESSAGE_STORAGE" class="message">
+
+			<p>ID: {{message.id}}</p>
+			<p>Symbol: {{message.symbol}}</p>
+			<p>Time: {{message.time}}</p>
+			<p>Price Diff actual: {{message.priceChanged}}</p>
+			<p>Price DIff threshold: {{message.diff}}</p>
+			<p>Interval: {{message.interval}} seconds</p>
+
+		</div>
+
+	</form>
+
+</main>
