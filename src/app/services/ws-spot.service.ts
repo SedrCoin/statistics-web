@@ -72,9 +72,6 @@ export class WsSpotService {
 		WS_NEW_STORAGE.forEach((el: WSMarketData[]): void => {
 			if (el.length < time + 1) return; // todo check later
 
-			console.log('el: ', el);
-			console.log('timeInterval: ', time);
-
 			const lastValue: WSMarketData = el[el.length - 1];
 			const preLastValue: WSMarketData = el[el.length - 1 - time];
 

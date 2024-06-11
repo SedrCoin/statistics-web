@@ -3,10 +3,12 @@ h1 {
 }
 
 .main {
-	border: 1px solid white;
-	height: 400px;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
 }
-
 
 .btn-wrapper {
 	display: flex;
@@ -35,5 +37,4 @@ h1 {
 	justify-content: center;
 	border: 1px solid white;
 	width: 200px;
-
 }

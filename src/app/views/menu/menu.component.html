@@ -1,6 +1,4 @@
 <nav class="navbar">
-
-	<button class="btn" routerLink="/"> SPOT</button>
-	<button class="btn" routerLink="/futures"> FUTURES</button>
-
+	<button class="btn" routerLink="/" routerLinkActive="active-route">{{ MarketTypeEnum.SPOT }}</button>
+	<button class="btn" routerLink="/futures">{{ MarketTypeEnum.FUTURES }}</button>
 </nav>

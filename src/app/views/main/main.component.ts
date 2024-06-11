@@ -9,39 +9,36 @@ import { MESSAGE_STORAGE } from '../../models/storage';
 	styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-	isInfo = false;
+	public isInfo = false;
 
-	diffForm: FormGroup;
+	public diffForm: FormGroup;
 
-	diff: number = 0;
-	time: number = 0;
+	public diff: number = 0;
+	public time: number = 0;
+
 	protected readonly MESSAGE_STORAGE = MESSAGE_STORAGE;
 
 	constructor(private ws: WsSpotService, private fb: FormBuilder) {
 	}
 
-	ngOnInit() {
-
+	public ngOnInit(): void {
 		this.diffForm = this.fb.group({
 			diff: [''],
 			time: ['']
 		});
 
-
 		this.diffForm.valueChanges.subscribe(val => {
 			this.diff = val.diff;
 			this.time = val.time;
-
-			console.log('Diff:', this.diff, 'Time:', this.time);
 		});
 	}
 
-	public startWs() {
+	public startWs(): void {
 		this.ws.launchWS(this.diff / 100, this.time);
 		this.isInfo = true;
 	}
 
-	public stopWs() {
+	public stopWs(): void {
 		this.ws.stopWS();
 	}
 }
