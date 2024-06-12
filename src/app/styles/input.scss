@@ -1,1 +1,17 @@
 @import 'vars';
+@import 'utils';
+
+.input {
+	border: none;
+	background-color: #a9a9a9;
+	border-radius: $border-radius;
+	height: 40px;
+	width: 100%;
+	padding: unit(2);
+	-moz-appearance: textfield;
+	transition: all 200ms ease-in-out;
+
+	&:hover {
+		border: 1px solid $secondary-color;
+	}
+}

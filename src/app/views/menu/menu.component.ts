@@ -9,6 +9,7 @@ export enum MarketTypeEnum {
 @Component({
 	selector: 'app-menu',
 	standalone: true,
+	host: { style: 'display: contents' },
 	templateUrl: './menu.component.html',
 	imports: [
 		RouterLink,

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IWSLOG } from '../../models/models';
+import { IWSLog } from '../../models/models';
 
 @Component({
 	selector: 'app-table',
@@ -8,5 +8,9 @@ import { IWSLOG } from '../../models/models';
 	styleUrl: './table.component.scss'
 })
 export class TableComponent {
-	@Input() public logs: IWSLOG[] = [];
+	@Input() public logs: IWSLog[] = [];
+
+	public getSpotLink(ticker: string): string {
+		return 'https://www.binance.com/en/trade/' + ticker + '?type=spot';
+	}
 }
