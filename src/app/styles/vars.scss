@@ -1,10 +1,19 @@
 $base-font-size: 14px;
 $base-line-height: 16px;
 
-$gap: 6px;
-$border-radius: 20px;
+$step: 6px;
+$border-radius: 12px;
 
-$primary-color: blue;
-$secondary-color: lightblue;
-$background-color: white;
-$font-color: black;
+$primary-color: #1010e7;
+$primary-color-hover: #0d0dbd;
+$primary-color-disabled: #4040ef;
+
+$secondary-color: #6e8993;
+$secondary-color-hover: #4d6067;
+$secondary-color-disabled: #a5c8d5;
+
+$background-color-light: #ece9e9;
+$background-color-dark: #ece9e9;
+
+$font-color-light: #ece9e9;
+$font-color-dark: #1e1d1d;

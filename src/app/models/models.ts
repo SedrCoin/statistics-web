@@ -1,4 +1,4 @@
-export interface IWSLOG {
+export interface IWSLog {
 	id: number,
 	symbol: string,
 	priceChanged: string,

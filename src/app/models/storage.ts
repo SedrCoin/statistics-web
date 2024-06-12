@@ -1,4 +1,4 @@
-import { IWSLOG } from './models';
+import { IWSLog } from './models';
 
 export interface IWSMarketDataResponse {
 	s: string;
@@ -51,4 +51,4 @@ export class WSMarketData implements ICoinMarketData {
 export let WS_NEW_STORAGE: Map<string, WSMarketData[]> = new Map();
 
 
-export const MESSAGE_STORAGE: IWSLOG[] = [];
+export const MESSAGE_STORAGE: IWSLog[] = [];

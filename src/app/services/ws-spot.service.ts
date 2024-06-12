@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IWSMarketDataResponse, MESSAGE_STORAGE, WS_NEW_STORAGE, WSMarketData } from '../models/storage';
-import { IWSLOG } from '../models/models';
+import { IWSLog } from '../models/models';
 
 @Injectable({
 	providedIn: 'root'
@@ -81,7 +81,7 @@ export class WsSpotService {
 				const logMessage = `🛎️ ${lastValue.symbol} только что изменился на ${(diff * 100).toFixed(4)}!`;
 				const currentTimestamp = Date.now();
 				console.log(logMessage);
-				const log: IWSLOG = {
+				const log: IWSLog = {
 					id: this.ID,
 					symbol: lastValue.symbol,
 					priceChanged: prettifyPercent(diff),

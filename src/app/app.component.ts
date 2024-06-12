@@ -5,6 +5,7 @@ import { MenuComponent } from './views/menu/menu.component';
 @Component({
 	selector: 'app-root',
 	standalone: true,
+	host: { style: 'display: contents' },
 	templateUrl: './app.component.html',
 	imports: [RouterOutlet, MenuComponent],
 })

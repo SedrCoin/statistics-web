@@ -1,14 +1,40 @@
+@import '../../styles/vars';
+@import '../../styles/utils';
+@import '../../styles/typography';
+
 :host {
 	.navbar {
+		width: 800px;
+		margin: 20px auto 20px;
 		height: 50px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-top: 20px;
-		gap: 15px;
+		gap: 12px;
+
+		& .li-item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			transition: all 200ms ease-in-out;
+
+			min-width: 120px;
+			height: 40px;
+			border-radius: $border-radius;
+			padding: unit(1) unit(2);
+
+			background: transparent;
+			color: $font-color-dark;
+			@extend %font-light;
+
+			&:hover {
+				cursor: pointer;
+				background-color: $secondary-color;
+			}
+		}
 	}
 
 	.active-route {
-		border: 1px solid white;
+		border: 1px solid $secondary-color;
 	}
 }

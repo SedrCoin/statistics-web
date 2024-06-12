@@ -1,4 +1,10 @@
+@import '../../styles/utils';
+
 :host {
+
+	margin-top: 18px;
+	height: 400px;
+	overflow: auto;
 
 	table {
 		border-collapse: collapse;
@@ -9,10 +15,11 @@
 	}
 
 	td {
-		padding: 5px;
+		padding: unit(1) unit(3);
 	}
 
 	th {
-		padding: 5px;
+		background-color: lightgray;
+		padding: unit(1) unit(3);
 	}
 }

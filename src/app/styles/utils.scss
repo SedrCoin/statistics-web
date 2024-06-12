@@ -1,1 +1,65 @@
 @import 'vars';
+
+@function unit($unit) {
+	@return calc($step * $unit);
+}
+
+.u-mt-s {
+	margin-top: unit(1);
+}
+
+.u-mt-m {
+	margin-top: unit(2);
+}
+
+.u-mt-l {
+	margin-top: unit(3);
+}
+
+.u-mb-s {
+	margin-bottom: unit(1);
+}
+
+.u-mb-m {
+	margin-bottom: unit(2);
+}
+
+.u-mb-l {
+	margin-bottom: unit(3);
+}
+
+.u-flex {
+	display: flex;
+}
+
+.u-flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.u-flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.u-gap-s {
+	gap: unit(1);
+}
+
+.u-gap-m {
+	gap: unit(2);
+}
+
+.u-gap-l {
+	gap: unit(3);
+}
+
+.u-grid-center {
+	display: grid;
+	place-items: center;
+}
+
+.u-contents {
+	display: contents;
+}

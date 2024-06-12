@@ -1,1 +1,23 @@
 @import 'vars';
+@import 'utils';
+
+.button {
+	min-width: 120px;
+	height: 40px;
+	padding: unit(1) unit(2);
+	border-radius: $border-radius;
+	border: none;
+	background-color: $secondary-color;
+	transition: background-color 200ms ease-in-out;
+	color: $font-color-light;
+
+	&:hover {
+		background-color: $secondary-color-hover;
+		cursor: pointer
+	}
+
+	&[disabled] {
+		background-color: $secondary-color-disabled;
+		cursor: not-allowed;
+	}
+}
