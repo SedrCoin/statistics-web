@@ -1,1 +1,23 @@
-<h1>Futures component works</h1>
+<main class="main u-flex-center u-mt-l">
+	<h1 class="h1 u-mb-m">Websocket launcher</h1>
+
+	<form [formGroup]="diffForm" class="u-flex-col u-gap-m u-mt-l">
+		<input class="input" formControlName="diff" id="diff-input" placeholder="Type diff" type="number">
+		<input class="input" formControlName="time" id="time-input" placeholder="Type time" type="number">
+
+		<div class="btn-wrapper u-mt-m">
+			<button (click)="startWs()" class="button" type="button"><span>▶️ </span>️Launch Websocket</button>
+			<button (click)="stopWs()" class="button" type="button"><span>⏸️ </span>Stop Websocket</button>
+		</div>
+	</form>
+
+	@if (isInfo) {
+		<div class="info u-mt-l">
+			<p class="t1">Diff: {{diff}} %, Time: {{time}}s</p>
+		</div>
+	}
+
+	@if (MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES)?.length) {
+		<app-table [logs]="MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES) || []"/>
+	}
+</main>

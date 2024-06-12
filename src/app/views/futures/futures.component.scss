@@ -1,40 +1,34 @@
-h1 {
-	text-align: center;
-}
+:host {
+	.main {
+		width: 800px;
+		margin: 0 auto;
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		align-items: center;
+	}
 
-.main {
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: center;
-	align-items: center;
-	gap: 30px;
-}
+	.btn-wrapper {
+		display: flex;
+		gap: 15px;
+	}
 
-.btn-wrapper {
-	display: flex;
-	gap: 15px;
-}
+	.info {
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 200px;
+	}
 
-.submit-btn {
-	color: white;
-}
 
-.stop-btn {
-	color: white;
-}
+	is-invalid {
+		border-color: red;
+	}
 
-.userInput {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	gap: 15px;
-}
 
-.info {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border: 1px solid white;
-	width: 200px;
+	.invalid-feedback {
+		color: red;
+		font-size: 12px;
+	}
 }

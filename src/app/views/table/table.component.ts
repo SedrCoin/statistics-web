@@ -10,6 +10,10 @@ import { IWSLog } from '../../models/models';
 export class TableComponent {
 	@Input() public logs: IWSLog[] = [];
 
+	public deleteRow(id: number): void {
+		this.logs.splice(id, 1)
+	}
+
 	public getSpotLink(ticker: string): string {
 		return 'https://www.binance.com/en/trade/' + ticker + '?type=spot';
 	}

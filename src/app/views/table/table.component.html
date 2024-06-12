@@ -3,12 +3,12 @@
 		<th>Ticker</th>
 		<th>Price diff</th>
 		<th>Diff threshold</th>
-		<th>Interval, seconds</th>
+		<th>Interval,s</th>
 		<th>Time</th>
 		<th>Actions</th>
 	</tr>
 
-	@for (log of logs; track log) {
+	@for (log of logs; track log;  let i = $index) {
 		<tr>
 			<td>
 				<a
@@ -20,12 +20,11 @@
 			</td>
 			<td>{{log.priceChanged}}</td>
 			<td>{{log.diff}}</td>
-			<td>{{log.interval}} seconds</td>
+			<td>{{log.interval}}s</td>
 			<td>{{log.time}}</td>
 			<td>
-				<button class="btn">🗑️</button>
+				<button (click)="deleteRow(i)" >🗑️</button>
 			</td>
 		</tr>
 	}
-
 </table>

@@ -11,13 +11,17 @@
 		</div>
 	</form>
 
+
 	@if (isInfo) {
 		<div class="info u-mt-l">
 			<p class="t1">Diff: {{diff}} %, Time: {{time}}s</p>
 		</div>
 	}
 
-	@if (MESSAGE_STORAGE.length) {
-		<app-table [logs]="MESSAGE_STORAGE"/>
+	@if (MESSAGES_STORAGE.get(MarketTypeEnum.SPOT)?.length) {
+		<app-table [logs]="MESSAGES_STORAGE.get(MarketTypeEnum.SPOT) || []"/>
 	}
 </main>
+
+
+<!--[ngClass]="{ 'is-invalid': time.invalid && (time.dirty || time.touched) }"-->

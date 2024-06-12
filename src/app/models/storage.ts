@@ -1,3 +1,4 @@
+import { MarketTypeEnum } from '../views/menu/menu.component';
 import { IWSLog } from './models';
 
 export interface IWSMarketDataResponse {
@@ -50,5 +51,6 @@ export class WSMarketData implements ICoinMarketData {
 
 export let WS_NEW_STORAGE: Map<string, WSMarketData[]> = new Map();
 
-
-export const MESSAGE_STORAGE: IWSLog[] = [];
+export const MESSAGES_STORAGE: Map<MarketTypeEnum, IWSLog[]> = new Map();
+MESSAGES_STORAGE.set(MarketTypeEnum.SPOT, []);
+MESSAGES_STORAGE.set(MarketTypeEnum.FUTURES, []);

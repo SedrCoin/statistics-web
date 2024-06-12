@@ -1,24 +1,36 @@
 import { Injectable } from '@angular/core';
-import { IWSMarketDataResponse, MESSAGE_STORAGE, WS_NEW_STORAGE, WSMarketData } from '../models/storage';
+import {
+	IWSMarketDataResponse,
+	MESSAGES_STORAGE,
+	WS_NEW_STORAGE,
+	WSMarketData
+} from '../models/storage';
 import { IWSLog } from '../models/models';
+import { MarketTypeEnum } from '../views/menu/menu.component';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class WsSpotService {
+export class WsService {
 
 	public isWsOn = false;
 	public diffThreshold: number = 0;
 	public timeInterval: number = 0;
 	private websocket: WebSocket | null = null;
+	private marketType: MarketTypeEnum;
 
 	private ID = 0;
 
-	public launchWS(diffThreshold: number, time: number): void {
+	public launchWS(isSpot: boolean, url: string, diffThreshold: number, time: number): void {
+		if (isSpot) {
+			this.marketType = MarketTypeEnum.SPOT;
+		} else {
+			this.marketType = MarketTypeEnum.FUTURES;
+		}
+
 		this.diffThreshold = diffThreshold;
 		this.timeInterval = time;
 
-		const url: string = 'wss://stream.binance.com:9443/ws/!ticker@arr';
 		this.websocket = new WebSocket(url);
 
 		this.websocket.onopen = () => {
@@ -65,7 +77,7 @@ export class WsSpotService {
 				}
 			}
 		});
-	}//  [1, 2]; time = 2
+	}
 
 	public checkForDiff(DiffThreshold: number, time: number): void {
 
@@ -79,9 +91,9 @@ export class WsSpotService {
 
 			if (diff > this.diffThreshold || diff < -this.diffThreshold) {
 				const logMessage = `🛎️ ${lastValue.symbol} только что изменился на ${(diff * 100).toFixed(4)}!`;
-				const currentTimestamp = Date.now();
 				console.log(logMessage);
 				const log: IWSLog = {
+
 					id: this.ID,
 					symbol: lastValue.symbol,
 					priceChanged: prettifyPercent(diff),
@@ -91,13 +103,15 @@ export class WsSpotService {
 				};
 
 				this.ID++;
-				MESSAGE_STORAGE.push(log);
+
+				if (this.marketType === MarketTypeEnum.SPOT) {
+					MESSAGES_STORAGE.get(MarketTypeEnum.SPOT)?.push(log);
+				} else {
+					MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES)?.push(log);
+				}
 			}
 		});
-
-
 	}
-
 }
 
 export function prettifyPercent(num: number): string {

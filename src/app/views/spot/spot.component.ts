@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { WsSpotService } from '../../services/ws-spot.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MESSAGE_STORAGE } from '../../models/storage';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MESSAGES_STORAGE } from '../../models/storage';
 import { TableComponent } from '../table/table.component';
+import { WsService } from '../../services/ws-service.service';
+import { NgClass } from '@angular/common';
+import { MarketTypeEnum } from '../menu/menu.component';
+
 
 @Component({
 	selector: 'app-spot',
@@ -10,27 +13,28 @@ import { TableComponent } from '../table/table.component';
 	templateUrl: './spot.component.html',
 	imports: [
 		ReactiveFormsModule,
-		TableComponent
+		TableComponent,
+		NgClass
 	],
 	styleUrl: './spot.component.scss'
 })
 export class SpotComponent implements OnInit {
+
+	private url: string = 'wss://stream.binance.com:9443/ws/!ticker@arr';
 	public isInfo = false;
 
 	public diffForm: FormGroup;
 
-	public diff: number = 0;
-	public time: number = 0;
+	public diff: number = 0.1;
+	public time: number = 1;
 
-	protected readonly MESSAGE_STORAGE = MESSAGE_STORAGE;
-
-	constructor(private ws: WsSpotService, private fb: FormBuilder) {
+	constructor(private ws: WsService, private fb: FormBuilder) {
 	}
 
 	public ngOnInit(): void {
 		this.diffForm = this.fb.group({
-			diff: [''],
-			time: ['']
+			diff: ['0.2', [Validators.required, Validators.min(1), Validators.max(100)]],
+			time: ['1', [Validators.required, Validators.min(1), Validators.max(100)]]
 		});
 
 		this.diffForm.valueChanges.subscribe(val => {
@@ -40,11 +44,14 @@ export class SpotComponent implements OnInit {
 	}
 
 	public startWs(): void {
-		this.ws.launchWS(this.diff / 100, this.time);
+		this.ws.launchWS(true, this.url, this.diff / 100, this.time);
 		this.isInfo = true;
 	}
 
 	public stopWs(): void {
 		this.ws.stopWS();
 	}
+
+	protected readonly MESSAGES_STORAGE = MESSAGES_STORAGE;
+	protected readonly MarketTypeEnum = MarketTypeEnum;
 }
