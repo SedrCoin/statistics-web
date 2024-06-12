@@ -1,5 +1,5 @@
 import { MarketTypeEnum } from '../views/menu/menu.component';
-import { IWSLog } from './models';
+import { IRangeMessageLog, IWSLog } from './models';
 
 export interface IWSMarketDataResponse {
 	s: string;
@@ -52,5 +52,12 @@ export class WSMarketData implements ICoinMarketData {
 export let WS_NEW_STORAGE: Map<string, WSMarketData[]> = new Map();
 
 export const MESSAGES_STORAGE: Map<MarketTypeEnum, IWSLog[]> = new Map();
+MESSAGES_STORAGE.set(MarketTypeEnum.SPOT, []);
+MESSAGES_STORAGE.set(MarketTypeEnum.FUTURES, []);
+
+export const PRE_PRICES_MAP = new Map<string, number[]>();
+export const PRICES_MAP = new Map<string, number[]>();
+
+export const RANGES_MESSAGES_STORAGE: Map<MarketTypeEnum, IRangeMessageLog[]> = new Map();
 MESSAGES_STORAGE.set(MarketTypeEnum.SPOT, []);
 MESSAGES_STORAGE.set(MarketTypeEnum.FUTURES, []);
