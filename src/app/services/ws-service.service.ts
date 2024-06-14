@@ -3,7 +3,9 @@ import {
 	IWSMarketDataResponse,
 	MESSAGES_STORAGE,
 	WS_NEW_STORAGE,
-	WSMarketData
+	WSMarketData,
+	BLACK_LIST,
+	WHITE_LIST
 } from '../models/storage';
 import { IWSLog } from '../models/models';
 import { MarketTypeEnum } from '../views/menu/menu.component';
@@ -61,7 +63,21 @@ export class WsService {
 	}
 
 	public filterAndMakeModels(data: IWSMarketDataResponse[]): WSMarketData[] {
-		return data.map((el: IWSMarketDataResponse): WSMarketData => new WSMarketData(el.s, el.p, el.P, el.c, el.E));
+
+		console.log(WHITE_LIST)
+		return data
+			.map((el: IWSMarketDataResponse): WSMarketData => new WSMarketData(el.s, el.p, el.P, el.c, el.E))
+			.filter(el =>  {
+
+				console.log(el.symbol)
+				if(WHITE_LIST.length > 0) {
+					return WHITE_LIST.includes(el.symbol)
+				}
+
+				return true
+			})
+
+
 	}
 
 	public updateStorage(filteredMarketData: WSMarketData[]): void {

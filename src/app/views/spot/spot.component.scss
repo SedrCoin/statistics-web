@@ -1,3 +1,5 @@
+@import '/src/app/styles/vars';
+
 :host {
 
 	.main {
@@ -7,11 +9,31 @@
 		flex-flow: column nowrap;
 		justify-content: center;
 		align-items: center;
+
+		& .form-wrapper {
+			width: 350px;
+
+			& > * {
+				width: 100%;
+			}
+		}
+	}
+
+
+	.nav {
+		border-bottom: 1px solid black;
+		cursor: pointer;
+		font-size: 20px;
 	}
 
 	.btn-wrapper {
 		display: flex;
+		justify-content: space-between;
 		gap: 15px;
+
+		& button {
+			width: 100%;
+		}
 	}
 
 	.info {
@@ -30,4 +52,155 @@
 		color: red;
 		font-size: 12px;
 	}
+
+
+	//dropdown
+
+	.dropdown {
+		max-height: 200px;
+		overflow-y: auto;
+		border: 1px solid #ccc;
+		border-radius: 12px;
+		background-color: $background-color-light;
+		color: $font-color-dark;
+	}
+
+	.dropdown ul {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+
+	}
+
+	.dropdown li {
+		padding: 8px;
+		cursor: pointer;
+	}
+
+	.dropdown li:hover {
+		background-color: #f0f0f0;
+	}
+
+	.selected-pairs {
+		margin-top: 20px;
+		border: 1px solid #6e8993;
+		border-radius: 12px;
+		max-height: 200px;
+		overflow-y: auto;
+		text-align: center;
+		padding: 10px 10px;
+	}
+
+
+	.selected-pairs ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	.selected-pairs li {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 5px 0;
+		gap: 12px;
+	}
 }
+
+
+.config-wrapper {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 10px;
+}
+
+
+.li-item {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all 200ms ease-in-out;
+	background: transparent;
+	color: $font-color-dark;
+
+	&:hover:after {
+		transform: scaleX(1);
+	}
+
+	&:after {
+		display: block;
+		width: 100%;
+		position: absolute;
+		content: '';
+		border-bottom: 1px solid #6e8993;
+		bottom: -2px;
+		left: 0;
+
+		transform: scaleX(0);
+		transition: transform 250ms ease-in-out;
+		transform-origin: 0% 50%;
+
+		&:hover {
+			transform: scaleX(1);
+		}
+
+	}
+
+	&.active {
+
+		color: #6e8993;
+
+		&:after {
+			transform: scaleX(1);
+			//border-bottom: 1px solid #6e8993;
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+		color: #6e8993;
+	}
+
+
+	@-webkit-keyframes tracking-in-expand {
+		0% {
+			letter-spacing: -0.5em;
+			opacity: 0;
+		}
+		40% {
+			opacity: 0.6;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+	@keyframes tracking-in-expand {
+		0% {
+			letter-spacing: -0.5em;
+			opacity: 0;
+		}
+		40% {
+			opacity: 0.6;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+}
+
+.li-pair-item {
+
+	button {
+		opacity: 0;
+		transition: all 100ms ease-in-out;
+	}
+
+	&:hover button {
+		opacity: 1;
+	}
+
+}
+
+
