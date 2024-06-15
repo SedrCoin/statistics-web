@@ -21,3 +21,26 @@
 		cursor: not-allowed;
 	}
 }
+
+
+.button-ghost {
+	min-width: 120px;
+	height: 40px;
+	padding: unit(1) unit(2);
+	border-radius: $border-radius;
+	border: 1px solid $secondary-color;
+	transition: background-color 200ms ease-in-out;
+	color: $font-color-dark;
+	cursor: pointer;
+}
+
+.icon-button {
+	min-width: 35px;
+	height: 35px;
+	padding: 5px;
+	border-radius: 50%;
+	border: .5px solid $secondary-color;
+	transition: background-color 200ms ease-in-out;
+	color: $font-color-dark;
+	cursor: pointer;
+}
