@@ -55,6 +55,9 @@ export const MESSAGES_STORAGE: Map<MarketTypeEnum, IWSLog[]> = new Map();
 MESSAGES_STORAGE.set(MarketTypeEnum.SPOT, []);
 MESSAGES_STORAGE.set(MarketTypeEnum.FUTURES, []);
 
+export let BLACK_LIST: string[] = [];
+export const WHITE_LIST: string[] = [];
+
 export const PRE_PRICES_MAP = new Map<string, number[]>();
 export const PRICES_MAP = new Map<string, number[]>();
 

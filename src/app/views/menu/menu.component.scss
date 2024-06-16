@@ -3,6 +3,10 @@
 @import '../../styles/typography';
 
 :host {
+
+	h2 {
+		text-align: center;
+	}
 	.navbar {
 		width: 800px;
 		margin: 20px auto 20px;

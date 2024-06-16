@@ -2,8 +2,8 @@
 @import 'utils';
 
 .input {
-	border: none;
-	background-color: #a9a9a9;
+	background-color: transparent;
+	border: .5px solid #676262;
 	border-radius: $border-radius;
 	height: 40px;
 	width: 100%;
