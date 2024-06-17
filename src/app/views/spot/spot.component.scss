@@ -10,6 +10,7 @@
 		justify-content: center;
 		align-items: center;
 
+
 		& .form-wrapper {
 			width: 350px;
 
@@ -18,7 +19,6 @@
 			}
 		}
 	}
-
 
 	.nav {
 		border-bottom: 1px solid black;
@@ -201,6 +201,21 @@
 		opacity: 1;
 	}
 
+}
+
+
+
+@media (max-width: 600px) {
+	:host {
+		.main {
+
+			width: 200px;
+
+			& .form-wrapper {
+				width: 300px;
+			}
+		}
+	}
 }
 
 
