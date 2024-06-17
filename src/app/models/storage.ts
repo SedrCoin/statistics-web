@@ -1,5 +1,5 @@
-import { MarketTypeEnum } from '../views/menu/menu.component';
 import { IRangeMessageLog, IWSLog } from './models';
+import { MarketTypeEnum } from '../services/page.service';
 
 export interface IWSMarketDataResponse {
 	s: string;
@@ -55,12 +55,9 @@ export const MESSAGES_STORAGE: Map<MarketTypeEnum, IWSLog[]> = new Map();
 MESSAGES_STORAGE.set(MarketTypeEnum.SPOT, []);
 MESSAGES_STORAGE.set(MarketTypeEnum.FUTURES, []);
 
-export let BLACK_LIST: string[] = [];
-export const WHITE_LIST: string[] = [];
-
 export const PRE_PRICES_MAP = new Map<string, number[]>();
 export const PRICES_MAP = new Map<string, number[]>();
 
 export const RANGES_MESSAGES_STORAGE: Map<MarketTypeEnum, IRangeMessageLog[]> = new Map();
-MESSAGES_STORAGE.set(MarketTypeEnum.SPOT, []);
-MESSAGES_STORAGE.set(MarketTypeEnum.FUTURES, []);
+RANGES_MESSAGES_STORAGE.set(MarketTypeEnum.SPOT, []);
+RANGES_MESSAGES_STORAGE.set(MarketTypeEnum.FUTURES, []);

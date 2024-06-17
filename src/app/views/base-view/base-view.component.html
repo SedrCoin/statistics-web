@@ -1,0 +1,130 @@
+<main class="main u-flex-center u-mt-l">
+
+	<div class="form-wrapper">
+		<div class="config-wrapper">
+
+			<li
+				(click)="onChangePage(configPagesEnum.DIFF)"
+				[ngClass]="{ 'active': currentPage === configPagesEnum.DIFF }"
+				class="li-item h4"
+			>
+				Diff
+			</li>
+
+			<li
+				(click)="onChangePage(configPagesEnum.WLBL)"
+				[ngClass]="{ 'active': currentPage === configPagesEnum.WLBL }"
+				class="li-item h4"
+			>
+				Add WL / BL
+			</li>
+
+			<li
+				(click)="onChangePage(configPagesEnum.RANGES)"
+				[ngClass]="{ 'active': currentPage === configPagesEnum.RANGES }"
+				class="li-item h4"
+			>
+				Ranges
+			</li>
+
+		</div>
+
+		<form [formGroup]="form" class="u-flex-col u-mt-l" (click)="stopPropagation($event)">
+
+			@switch (currentPage) {
+
+				@case (configPagesEnum.DIFF) {
+
+					<label for="diff-input">Enter Diff</label>
+					<input class="input" formControlName="diff" id="diff-input" placeholder="0.15" type="number">
+
+					<label for="time-input" class="u-mt-m">Enter Time</label>
+					<input class="input" formControlName="time" id="time-input" placeholder="1" type="number">
+				}
+				@case (configPagesEnum.WLBL) {
+					<input
+						class="input wl-input"
+						formControlName="whitelist"
+						id="whitelist"
+						placeholder="Add whitelist"
+						type="text"
+						(focus)="showDropdown()"
+						(input)="onPairChange($event)"
+					>
+
+					@if (showList) {
+
+						<div class="dropdown">
+							<ul>
+								@for (pair of filteredPairs; track pair) {
+									<li (click)="selectPair(pair)">
+										{{ pair }}
+									</li>
+								}
+							</ul>
+						</div>
+					}
+
+					@if (selectedPairs.length) {
+						<div class="selected-pairs">
+							<h3>
+								Whitelist:  {{ selectedPairs.length }} {{ selectedPairs.length === 1 ? 'coin' : 'coins' }} </h3>
+							<ul>
+								@for (selectedPair of selectedPairs; track selectedPair) {
+									<li class="li-pair-item">
+										{{ selectedPair }}
+										<button class="icon-button" (click)="removePair(selectedPair)">🗑️</button>
+									</li>
+								}
+							</ul>
+
+						</div>
+
+						@if (selectedPairs.length) {
+							<div class="btn-wrapper u-mt-l">
+								<button (click)="applyBLWL()" class="button-ghost">Apply</button>
+							</div>
+						}
+					}
+				}
+				@case (configPagesEnum.RANGES) {
+
+					<label for="time-interval">Select Time Interval</label>
+					<input class="input" formControlName="timeInterval" id="time-interval" placeholder="6hrs" type="text">
+
+					<label for="interval-diff" class="u-mt-m">Enter Interval Diff</label>
+					<input class="input" formControlName="intervalDiff" id="interval-diff" placeholder="0.5" type="number">
+
+					<label for="dots-amount" class="u-mt-m">Enter Amount of Dots</label>
+					<input class="input" formControlName="dotsAmount" id="dots-amount" placeholder="5" type="number">
+				}
+			}
+		</form>
+
+		<div class="btn-wrapper u-mt-l">
+			<button (click)="startWs()" class="button" type="button"><span>▶️ </span>️Launch Scanner</button>
+			<button (click)="stopWs()" class="button" type="button"><span>⏸️ </span>Stop Scanner</button>
+		</div>
+
+		@if (isShowInfo) {
+			<div class="info u-mt-l">
+				<p class="t1">Diff: {{ userConfig.diff }} %, Time: {{ userConfig.time }}s</p>
+			</div>
+		}
+	</div>
+
+	@if (MESSAGES_STORAGE.get(MarketTypeEnum.SPOT)?.length) {
+		<app-base-table
+			[logs]="MESSAGES_STORAGE.get(MarketTypeEnum.SPOT) || []"
+			[marketType]="MarketTypeEnum.FUTURES"
+		/>
+	}
+
+	@if (RANGES_MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES)?.length) {
+		<app-ranges-table
+			[logs]="RANGES_MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES) || []"
+			[marketType]="MarketTypeEnum.FUTURES"
+		/>
+	}
+</main>
+
