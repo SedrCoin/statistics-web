@@ -1,0 +1,52 @@
+
+:host {
+	.menu {
+		height: 70px;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		position: sticky;
+		width: 100%;
+		top: 0;
+		border-bottom: 1px solid rgba(0, 0, 0, .1019607843);
+	}
+
+
+	.welcome-wrapper {
+		margin: 50px 10px;
+		padding: 20px 20px;
+
+		text-align: center;
+	}
+
+	.text {
+		margin: 30px 10px;
+		padding: 20px 20px;
+		text-align: center;
+		line-height: 32px;
+	}
+
+	.text p {
+		line-height: 32px;
+		font-size: 16px;
+	}
+
+	.welcome h1 {
+		font-weight: 500;
+	}
+
+
+	.btn-wrapper {
+		margin: 50px 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 12px;
+	}
+
+	.btn-start{
+		background-color: #4c96d2;
+	}
+}
+
+

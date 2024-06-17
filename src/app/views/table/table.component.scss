@@ -28,4 +28,30 @@
 		background-color: lightgray;
 		padding: unit(1) unit(3);
 	}
+
+
+	.red-text {
+		color: red;
+	}
+
+	.green-text {
+		color: green;
+	}
+
+
+	@media screen and (max-width: 600px) {
+		table {
+			td {
+				padding: unit(1) unit(1);
+			}
+
+			th {
+				background-color: lightgray;
+				padding: unit(1) unit(1);
+			}
+
+			width: 250px;
+		}
+
+	}
 }

@@ -16,6 +16,7 @@
 		justify-content: center;
 		gap: 12px;
 
+
 		& .li-item {
 			display: flex;
 			justify-content: center;
@@ -40,5 +41,22 @@
 
 	.active-route {
 		border: 1px solid $secondary-color;
+	}
+
+
+	@media (max-width: 600px) {
+		h2 {
+			font-size: 26px;
+			line-height: 32px;
+		}
+
+		.navbar {
+			width: 400px;
+			margin: 10px auto 10px;
+		}
+
+		.li-item {
+			width: 80px;
+		}
 	}
 }

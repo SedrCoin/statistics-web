@@ -38,8 +38,16 @@
 body {
 	height: 100%;
 	background-color: $background-color-light;
+	font-size: $base-font-size;
+	line-height: $base-line-height;
 	color: $font-color-dark;
 	width: 100%;
 	@extend %font-light;
 }
 
+@media (max-width: 600px) {
+	body {
+		font-size: $mobile-font-size;
+		line-height: $mobile-line-height;
+	}
+}
