@@ -1,0 +1,36 @@
+<table>
+	<tr>
+		<th>Ticker</th>
+		<th>Price diff</th>
+		<th>Diff threshold</th>
+		<th>Interval,s</th>
+		<th>Time</th>
+		<th></th>
+	</tr>
+
+	@for (log of logs; track log;  let i = $index) {
+		<tr>
+			<td>
+				<a
+					class="link"
+					[href]="getLink(log.symbol)"
+					target="_blank"
+				>
+					{{log.symbol}}
+				</a>
+			</td>
+			<td
+				[ngClass]="{'red-text': parseFloat(log.priceChanged) < 0, 'green-text':  parseFloat(log.priceChanged) > 0}"
+			>
+				{{ parseFloat( log.priceChanged) < 0 ? "🔻" + parseFloat( log.priceChanged ):  log.priceChanged }}
+			</td>
+			<td >{{log.diff}}</td>
+			<td>{{log.interval}}s</td>
+			<td>{{log.time}}</td>
+			<td>
+				<button class="icon-button" (click)="deleteRow(log)" >🗑️</button>
+			</td>
+		</tr>
+	}
+
+</table>

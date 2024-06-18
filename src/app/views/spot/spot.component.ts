@@ -1,13 +1,14 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BLACK_LIST, MESSAGES_STORAGE, WHITE_LIST } from '../../models/storage';
-import { TableComponent } from '../table/table.component';
+import { MESSAGES_STORAGE } from '../../models/storage';
 import { WsService } from '../../services/ws-service.service';
 import { NgClass } from '@angular/common';
-import { MarketTypeEnum } from '../menu/menu.component';
 import { BinanceService } from '../../services/api.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { BaseTableComponent } from '../base-table/base-table.component';
 import { config } from 'rxjs';
+import { IConfigForm, RangeIntervalsEnum } from '../../models/models';
+import { MarketTypeEnum } from 'src/app/services/page.service';
 
 export enum ConfigPagesEnum {
 	DIFF = 'diff',
@@ -18,32 +19,39 @@ export enum ConfigPagesEnum {
 @Component({
 	selector: 'app-spot',
 	standalone: true,
-	templateUrl: './spot.component.html',
 	imports: [
 		ReactiveFormsModule,
-		TableComponent,
+		BaseTableComponent,
 		NgClass,
 		RouterLinkActive,
-		RouterLink
+		RouterLink,
+		BaseTableComponent
 	],
+	templateUrl: './spot.component.html',
 	styleUrl: './spot.component.scss'
 })
 export class SpotComponent implements OnInit {
-
+	private url: string = 'wss://stream.binance.com:9443/ws/!ticker@arr';
 	public currentPage = ConfigPagesEnum.DIFF;
 	public configPagesEnum = ConfigPagesEnum;
 
+	public formValue: IConfigForm = {
+		diff: 0.5,
+		time: 1,
+		timeInterval: RangeIntervalsEnum.ONE_MINUTE,
+		intervalDiff: 0.001,
+		dotsAmount: 1
+	};
+
 	//dropdown
+	public allPairs: string[] = [];
+	public filteredPairs: string[] = [];
+	public selectedPairs: string[] = [];
+	public showList: boolean = false;
 
-	allPairs: string[] = [];
-	filteredPairs: string[] = [];
-	selectedPairs: string[] = [];
-	showList: boolean = false;
+	public blacklist: string = '';
+	public whitelist: string = '';
 
-	bl: string = '';
-	wl:string = '';
-
-	private url: string = 'wss://stream.binance.com:9443/ws/!ticker@arr';
 	public isInfo = false;
 
 	public diffForm: FormGroup;
@@ -51,7 +59,11 @@ export class SpotComponent implements OnInit {
 	public diff: number = 0.1;
 	public time: number = 1;
 
-	constructor(private ws: WsService, private fb: FormBuilder, private binanceService: BinanceService) {
+	constructor(
+		private ws: WsService,
+		private fb: FormBuilder,
+		private binanceService: BinanceService
+	) {
 	}
 
 	public ngOnInit(): void {
@@ -63,12 +75,11 @@ export class SpotComponent implements OnInit {
 			config: ['']
 		});
 
-
 		this.loadPairs();
 	}
 
 	public startWs(): void {
-		this.ws.launchWS(true, this.url, this.diff / 100, this.time);
+		this.ws.launchWS(true, this.url, this.formValue);
 		this.isInfo = true;
 	}
 
@@ -80,21 +91,13 @@ export class SpotComponent implements OnInit {
 		this.currentPage = page;
 	}
 
-	applyBLWL(): void {
-		console.log('blacklist: ' + this.bl)
-		console.log('whitelist: ' + this.wl)
-		WHITE_LIST.push(...this.selectedPairs);
-
+	public applyBLWL(): void {
+		// WHITE_LIST.push(...this.selectedPairs);
 	}
-
-	protected readonly MESSAGES_STORAGE = MESSAGES_STORAGE;
-	protected readonly MarketTypeEnum = MarketTypeEnum;
-
-
 
 	// dropDown func
 
-	loadPairs() {
+	public loadPairs() {
 		this.binanceService.getPairs().subscribe((data: any) => {
 			this.allPairs = data.map((pair: { symbol: any; }) => pair.symbol).sort();
 			this.filteredPairs = [...this.allPairs];
@@ -102,49 +105,48 @@ export class SpotComponent implements OnInit {
 
 	}
 
-	filterPairs(query: string) {
-		this.filteredPairs = this.allPairs.filter(pair => pair.toLowerCase().includes(query.toLowerCase()));
+	public filterPairs(query: string): void {
+		this.filteredPairs = this.allPairs.filter((pair: string) => pair.toLowerCase().includes(query.toLowerCase()));
 	}
 
-	onPairChange(event: Event) {
+	public onPairChange(event: Event): void {
 		const input = event.target as HTMLInputElement;
 		this.filterPairs(input.value);
 	}
 
-	selectPair(pair: string) {
+	public selectPair(pair: string): void {
 		if (!this.selectedPairs.includes(pair)) {
 			this.selectedPairs.push(pair);
 			this.diffForm.get('pair')?.setValue('');
 			this.filteredPairs = [...this.allPairs];
 			this.showList = false;
-			this.diffForm.get('wl')?.reset()
+			this.diffForm.get('wl')?.reset();
 		}
 	}
 
-	removePair(pair: string) {
-		this.selectedPairs = this.selectedPairs.filter(p => p !== pair);
-		const index = WHITE_LIST.indexOf(pair)
-		WHITE_LIST.splice(index, 1)
-
+	public removePair(pair: string): void {
+		this.selectedPairs = this.selectedPairs.filter((p: string): boolean => p !== pair);
+		// const index = WHITE_LIST.findIndex((el: string): boolean => el === pair);
+		// if (index > -1) {
+		// 	WHITE_LIST.splice(index, 1);
+		// }
 	}
 
-	showDropdown() {
+	public showDropdown(): void {
 		this.showList = true;
 	}
 
-
-
 	//close dropdown on click outside
-	stopPropagation(event: Event) {
+	public stopPropagation(event: Event): void {
 		event.stopPropagation();
 	}
 
 	@HostListener('document:click', ['$event'])
-	closeDropdown(event: Event) {
+	public closeDropdown(event: Event): void {
 		this.showList = false;
 	}
 
 	protected readonly config = config;
+	protected readonly MESSAGES_STORAGE = MESSAGES_STORAGE;
+	protected readonly MarketTypeEnum = MarketTypeEnum;
 }
-
-

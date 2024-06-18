@@ -1,0 +1,35 @@
+<table>
+	<tr>
+		<th>Ticker</th>
+		<th>Time Interval</th>
+		<th>Set Diff</th>
+		<th>Range Found</th>
+		<th>Dots amount</th>
+		<th>Direction</th>
+		<th>Time</th>
+		<th>Actions</th>
+	</tr>
+
+	@for (log of logs; track log) {
+		<tr>
+			<td>
+				<a
+					class="link"
+					[href]="getLink(log.symbol)"
+					target="_blank">
+					{{log.symbol}}
+				</a>
+			</td>
+			<td>{{log.timeInterval}}</td>
+			<td>{{log.diff}}</td>
+			<td>{{log.foundRange}}</td>
+			<td>{{log.dotsAmount}}</td>
+			<td>{{log.isUp ? 'UP' : 'DOWN'}}</td>
+			<td>{{log.time}}</td>
+			<td>
+				<button (click)="deleteRow(log)">🗑️</button>
+			</td>
+		</tr>
+	}
+
+</table>

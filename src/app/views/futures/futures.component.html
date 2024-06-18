@@ -1,23 +1,60 @@
 <main class="main u-flex-center u-mt-l">
-	<h1 class="h1 u-mb-m">Websocket launcher</h1>
 
-	<form [formGroup]="diffForm" class="u-flex-col u-gap-m u-mt-l">
-		<input class="input" formControlName="diff" id="diff-input" placeholder="Type diff" type="number">
-		<input class="input" formControlName="time" id="time-input" placeholder="Type time" type="number">
-
-		<div class="btn-wrapper u-mt-m">
-			<button (click)="startWs()" class="button" type="button"><span>▶️ </span>️Launch Websocket</button>
-			<button (click)="stopWs()" class="button" type="button"><span>⏸️ </span>Stop Websocket</button>
+	<div class="form-wrapper">
+		<div class="config-wrapper">
+			<li
+				(click)="onChangePage(configPagesEnum.DIFF)"
+				[ngClass]="{ 'active': currentPage === configPagesEnum.DIFF }"
+				class="li-item h4"
+			>
+				Diff
+			</li>
+			<li
+				(click)="onChangePage(configPagesEnum.WLBL)"
+				[ngClass]="{ 'active': currentPage === configPagesEnum.WLBL }"
+				class="li-item h4"
+			>
+				Add WL / BL
+			</li>
+			<li
+				(click)="onChangePage(configPagesEnum.RANGES)"
+				[ngClass]="{ 'active': currentPage === configPagesEnum.RANGES }"
+				class="li-item h4"
+			>
+				Config
+			</li>
 		</div>
-	</form>
+
+		<form [formGroup]="diffForm" class="u-flex-col u-gap-m u-mt-l">
+			<input class="input" formControlName="diff" id="diff-input" placeholder="Type diff" type="number">
+			<input class="input" formControlName="time" id="time-input" placeholder="Type time" type="number">
+
+			<input class="input" formControlName="timeInterval" placeholder="Type time interval" type="text">
+			<input class="input" formControlName="intervalDiff" placeholder="Type interval diff" type="number">
+			<input class="input" formControlName="dotsAmount" placeholder="Type dots amount" type="number">
+
+			<div class="btn-wrapper u-mt-m">
+				<button (click)="startWs()" class="button" type="button">▶️️Launch Websocket</button>
+				<button (click)="stopWs()" class="button" type="button">⏸️Stop Websocket</button>
+			</div>
+		</form>
+	</div>
 
 	@if (isInfo) {
 		<div class="info u-mt-l">
-			<p class="t1">Diff: {{diff}} %, Time: {{time}}s</p>
+			<p class="t1">Diff: {{ formValue.diff }} %, Time: {{ formValue.time }}s</p>
 		</div>
 	}
 
-	@if (MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES)?.length) {
-		<app-table [logs]="MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES) || []"/>
+	<!--	@if (MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES)?.length) {-->
+	<!--		<app-base-table [logs]="MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES) || []"><h2>asdasd</h2></app-base-table>-->
+	<!--	}-->
+
+	@if (RANGES_MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES)?.length) {
+		<app-ranges-table
+			[logs]="RANGES_MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES) || []"
+			[marketType]="MarketTypeEnum.FUTURES"
+		/>
 	}
+
 </main>

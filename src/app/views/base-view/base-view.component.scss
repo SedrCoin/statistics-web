@@ -1,4 +1,4 @@
-@import '/src/app/styles/vars';
+@import '../../styles/vars';
 
 :host {
 
@@ -17,12 +17,6 @@
 				width: 100%;
 			}
 		}
-	}
-
-	.nav {
-		border-bottom: 1px solid black;
-		cursor: pointer;
-		font-size: 20px;
 	}
 
 	.btn-wrapper {
@@ -173,20 +167,6 @@
 		opacity: 1;
 	}
 }
-
-@media (max-width: 600px) {
-	:host {
-		.main {
-
-			width: 200px;
-
-			& .form-wrapper {
-				width: 300px;
-			}
-		}
-	}
-}
-
 
 //@-webkit-keyframes tracking-in-expand {
 //	0% {
