@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MarketTypeEnum, PageService } from '../../services/page.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'app-menu',
 	standalone: true,
 	host: { style: 'display: contents' },
 	templateUrl: './menu.component.html',
-	imports: [NgClass],
+	imports: [NgClass, RouterLink],
 	styleUrl: './menu.component.scss'
 })
 export class MenuComponent {

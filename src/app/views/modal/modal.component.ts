@@ -87,7 +87,7 @@ export class ModalComponent {
 
   login() {
     this.authService.login(this.username, this.password).subscribe( () => {
-      this.router.navigate(['/spot']);
+      this.router.navigate(['/main']);
     })
   }
 

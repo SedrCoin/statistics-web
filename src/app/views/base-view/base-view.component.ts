@@ -9,6 +9,7 @@ import { BaseTableComponent } from '../base-table/base-table.component';
 import { NgClass } from '@angular/common';
 import { RangesTableComponent } from '../ranges-table/ranges-table.component';
 import { MarketTypeEnum, PageService } from 'src/app/services/page.service';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
 	selector: 'app-base-view',
@@ -18,7 +19,8 @@ import { MarketTypeEnum, PageService } from 'src/app/services/page.service';
 		FormsModule,
 		ReactiveFormsModule,
 		NgClass,
-		RangesTableComponent
+		RangesTableComponent,
+		MenuComponent
 	],
 	templateUrl: './base-view.component.html',
 	styleUrl: './base-view.component.scss'
