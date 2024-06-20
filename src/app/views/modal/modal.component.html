@@ -1,19 +1,29 @@
 
 @if (isOpen) {
-	<div class="modal-overlay" (click)="close($event)">
-		<div class="modal-content" (click)="$event.stopPropagation()">
+	<div class="modal-overlay"    (click)="close($event)">
+		<div class="modal-content"  (click)="$event.stopPropagation()">
 
 			<span class="close" (click)="close()">&times;</span>
 
 
 			<div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin: 30px 10px" >
-				<button  (click)="toggleSignIn()" class="button">
-					Sign In
-				</button>
 
-				<button (click)="toggleRegister()" class="button">
-					Register
-				</button>
+				<ul>
+					<li
+						class="li-item h4"
+						(click)="toggleSignIn()"
+						[ngClass]="{ 'active': isSignIn }"
+					>
+					Log in
+					</li>
+					<li
+						class="li-item h4"
+						(click)="toggleRegister()"
+						[ngClass]="{ 'active': isRegister}"
+					>
+						Sign Up
+					</li>
+				</ul>
 			</div>
 
 			@if (isSignIn) {
@@ -97,7 +107,7 @@
 
 
 				<div class="btn-wrapper">
-					<button  (click)="register()"  class="button btn-start">Register</button>
+					<button  (click)="register()"  class="button btn-start"> Create an account</button>
 				</div>
 
 

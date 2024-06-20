@@ -15,7 +15,6 @@
 	.welcome-wrapper {
 		margin: 50px 10px;
 		padding: 20px 20px;
-
 		text-align: center;
 	}
 
@@ -26,7 +25,7 @@
 		line-height: 32px;
 	}
 
-	.text p {
+	span {
 		line-height: 32px;
 		font-size: 16px;
 	}
@@ -46,6 +45,13 @@
 
 	.btn-start{
 		background-color: #4c96d2;
+	}
+	
+	
+	@media (max-width: 600px) {
+		button{
+			width: 80px
+		}
 	}
 }
 

@@ -44,3 +44,14 @@
 	color: $font-color-dark;
 	cursor: pointer;
 }
+
+
+@media (max-width: 600px) {
+	.button {
+		min-width: 90px;
+	}
+
+	.button-ghost {
+		min-width: 90px;
+	}
+}

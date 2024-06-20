@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { NgClass } from '@angular/common';
+
 
 
 
@@ -9,11 +11,12 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [
-    RouterLink,
-    FormsModule,
+	imports: [
+		RouterLink,
+		FormsModule,
+		NgClass,
 
-  ],
+	],
 
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss'
