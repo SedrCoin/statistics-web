@@ -187,15 +187,24 @@ export class WsService {
 			if (!this.userConfig.diff) return;
 
 			if (diff > this.userConfig.diff || diff < -this.userConfig.diff) {
+				console.log()
 				// const logMessage = `🛎️ ${lastValue.symbol} только что изменился на ${(diff * 100).toFixed(4)}!`;
 				const log: IWSLog = {
 					id: this.ID,
 					symbol: lastValue.symbol,
 					priceChanged: prettifyPercent(diff),
 					time: new Date(Date.now()).toLocaleTimeString(),
-					diff: prettifyPercent(this.userConfig.diff),
-					interval: this.userConfig.time
+					diff: this.userConfig.diff * 100,
+					interval: this.userConfig.time,
+					prevPrice: preLastValue.lastPrice,
+					curPrice: lastValue.lastPrice
 				};
+
+
+				console.log('было')
+				console.log(preLastValue.lastPrice);
+				console.log('cтало')
+				console.log(lastValue.lastPrice);
 
 				this.ID++;
 
@@ -211,7 +220,14 @@ export class WsService {
 
 export function prettifyPercent(num: number): string {
 	if (!num) return '';
-	return (num * 100).toFixed(2) + ' %';
+	return (num * 100).toFixed(2) + '%';
 }
 
+export function prettifyNums(num: string): string {
+	if(+num < 1 ) {
+		return num + '$';
+	} else {
+		return num + '$'
+	}
+}
 
