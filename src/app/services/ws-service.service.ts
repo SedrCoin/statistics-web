@@ -187,7 +187,6 @@ export class WsService {
 			if (!this.userConfig.diff) return;
 
 			if (diff > this.userConfig.diff || diff < -this.userConfig.diff) {
-				console.log()
 				// const logMessage = `🛎️ ${lastValue.symbol} только что изменился на ${(diff * 100).toFixed(4)}!`;
 				const log: IWSLog = {
 					id: this.ID,
@@ -203,8 +202,16 @@ export class WsService {
 				this.ID++;
 
 				if (this.marketType === MarketTypeEnum.SPOT) {
+					const index: undefined | number = MESSAGES_STORAGE.get(MarketTypeEnum.SPOT)?.findIndex((el: IWSLog) => el.symbol === log.symbol && el.diff === log.diff);
+					if (index && index > -1) {
+						return;
+					}
 					MESSAGES_STORAGE.get(MarketTypeEnum.SPOT)?.push(log);
 				} else {
+					const index: undefined | number = MESSAGES_STORAGE.get(MarketTypeEnum.SPOT)?.findIndex((el: IWSLog) => el.symbol === log.symbol && el.diff === log.diff);
+					if (index && index > -1) {
+						return;
+					}
 					MESSAGES_STORAGE.get(MarketTypeEnum.FUTURES)?.push(log);
 				}
 			}

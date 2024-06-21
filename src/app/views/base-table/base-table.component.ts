@@ -25,7 +25,6 @@ export class BaseTableComponent {
 	}
 
 	public getLink(ticker: string): string {
-		console.log('market type: ', this.marketType);
 		if (this.marketType === MarketTypeEnum.SPOT) {
 			return 'https://www.binance.com/en/trade/' + ticker + '?type=spot';
 		} else {

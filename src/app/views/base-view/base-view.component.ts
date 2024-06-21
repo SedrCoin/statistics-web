@@ -64,6 +64,7 @@ export class BaseViewComponent implements OnInit {
 
 	// common properties
 	private wsUrl: string;
+	public isScannerOn = false;
 	public currentSection: MarketTypeEnum;
 	public isPairsLoading = true;
 
@@ -116,11 +117,13 @@ export class BaseViewComponent implements OnInit {
 
 	public startWs(): void {
 		this.ws.launchWS(this.currentSection === MarketTypeEnum.SPOT, this.wsUrl, this.userConfig);
+		this.isScannerOn = true;
 		this.isShowInfo = true;
 	}
 
 	public stopWs(): void {
 		this.ws.stopWS();
+		this.isScannerOn = false;
 	}
 
 	public onChangePage(page: ConfigPagesEnum): void {

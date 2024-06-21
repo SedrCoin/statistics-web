@@ -169,8 +169,22 @@
 		</form>
 
 		<div class="btn-wrapper u-mt-l">
-			<button (click)="startWs()" class="button" type="button"><span>▶️ </span>️Launch Scanner</button>
-			<button (click)="stopWs()" class="button" type="button"><span>⏸️ </span>Stop Scanner</button>
+			<button
+				(click)="startWs()"
+				[disabled]="isScannerOn"
+				class="button"
+				type="button"
+			>
+				<span>▶️ </span>️Launch Scanner
+			</button>
+			<button
+				(click)="stopWs()"
+				[disabled]="!isScannerOn"
+				class="button"
+				type="button"
+			>
+				<span>⏸️ </span>Stop Scanner
+			</button>
 		</div>
 
 	</div>
