@@ -200,12 +200,6 @@ export class WsService {
 					curPrice: lastValue.lastPrice
 				};
 
-
-				console.log('было')
-				console.log(preLastValue.lastPrice);
-				console.log('cтало')
-				console.log(lastValue.lastPrice);
-
 				this.ID++;
 
 				if (this.marketType === MarketTypeEnum.SPOT) {
