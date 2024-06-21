@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IWSLog } from '../../models/models';
 import { NgClass, NgStyle } from '@angular/common';
 import { MarketTypeEnum } from '../../services/page.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
 	selector: 'app-base-table',
@@ -10,9 +11,15 @@ import { MarketTypeEnum } from '../../services/page.service';
 	templateUrl: './base-table.component.html',
 	styleUrl: './base-table.component.scss'
 })
-export class BaseTableComponent {
+export class BaseTableComponent implements OnChanges {
 	@Input({ required: true }) public marketType: MarketTypeEnum;
 	@Input({ required: true }) public logs: IWSLog[] = [];
+
+	constructor(private db: DataService) {}
+
+	public ngOnChanges(changes: SimpleChanges): void {
+		console.log('received new input logs: ', this.logs);
+	}
 
 	public deleteRow(log: IWSLog): void {
 		const index: number =  this.logs.findIndex((el: IWSLog): boolean => el.id === log.id);
@@ -30,4 +37,5 @@ export class BaseTableComponent {
 	}
 
 	protected readonly parseFloat = parseFloat;
+	protected readonly Math = Math;
 }

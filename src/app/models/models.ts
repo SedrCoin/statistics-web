@@ -22,8 +22,11 @@ export interface IWSLog {
 	symbol: string;
 	priceChanged: string;
 	time: string;
-	diff: string;
+	diff: number;
 	interval: number;
+	prevPrice: string;
+	curPrice: string;
+
 }
 
 export enum RangeIntervalsEnum {

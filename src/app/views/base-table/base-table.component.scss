@@ -22,11 +22,13 @@
 
 	td {
 		padding: unit(1) unit(3);
+		max-width: 200px;
 	}
 
 	th {
 		background-color: lightgray;
 		padding: unit(1) unit(3);
+		width: 200px;
 	}
 
 
@@ -38,6 +40,26 @@
 		color: green;
 	}
 
+
+	.caret-up {
+		width: 0;
+		height: 0;
+		display: inline-block;
+		vertical-align: middle;
+		border-style: solid;
+		border-width: 0 6px 6px 6px;
+		border-color: transparent transparent green transparent;
+	}
+
+	.caret-down {
+		width: 0;
+		height: 0;
+		display: inline-block;
+		vertical-align: middle;
+		border-style: solid;
+		border-width: 6px 6px 0 6px;
+		border-color: red transparent transparent transparent;
+	}
 
 	@media screen and (max-width: 600px) {
 		table {

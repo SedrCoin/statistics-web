@@ -11,6 +11,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 const firebaseConfig = {
 	apiKey: "AIzaSyCIS00p2LLGxXaQeGBOdIFME07mh-syLCw",
 	authDomain: "webstatistics-f05f5.firebaseapp.com",
+	databaseURL: "https://webstatistics-f05f5-default-rtdb.europe-west1.firebasedatabase.app",
 	projectId: "webstatistics-f05f5",
 	storageBucket: "webstatistics-f05f5.appspot.com",
 	messagingSenderId: "395657485680",
