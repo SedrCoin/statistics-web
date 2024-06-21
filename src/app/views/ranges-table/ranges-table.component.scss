@@ -2,6 +2,8 @@
 
 :host {
 
+	position: relative;
+	max-width: 600px;
 	margin-top: 18px;
 	height: 400px;
 	overflow: auto;
@@ -27,5 +29,12 @@
 	th {
 		background-color: lightgray;
 		padding: unit(1) unit(3);
+	}
+}
+
+
+@media (max-width: 600px) {
+	:host {
+		max-width: 350px;
 	}
 }

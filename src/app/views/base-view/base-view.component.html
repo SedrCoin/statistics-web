@@ -114,9 +114,9 @@
 
 					@if (selectedWhitelistPairs.length || selectedBlacklistPairs.length) {
 						<div class="selected-pairs">
-							<h4 class="u-mb-s">
+							<h5 class="u-mb-s">
 								Whitelist:  {{ selectedWhitelistPairs.length }} {{ selectedWhitelistPairs.length === 1 ? 'coin' : 'coins' }}
-							</h4>
+							</h5>
 							<ul>
 								@for (selectedPair of selectedWhitelistPairs; track selectedPair) {
 									<li class="li-pair-item">
@@ -129,9 +129,9 @@
 
 							<hr>
 
-							<h4 class="u-mb-s">
+							<h5 class="u-mb-s">
 								Blacklist:  {{ selectedBlacklistPairs.length }} {{ selectedBlacklistPairs.length === 1 ? 'coin' : 'coins' }}
-							</h4>
+							</h5>
 							<ul>
 								@for (selectedPair of selectedBlacklistPairs; track selectedPair) {
 									<li class="li-pair-item">
@@ -179,7 +179,7 @@
 		
 		
 		
-		<div class="btn-wrapper u-mt-l">
+		<div class="btn-wrapper u-mt-xl">
 			<button
 				(click)="startWs()"
 				[disabled]="isScannerOn"

@@ -6,11 +6,16 @@
 
 	h2 {
 		text-align: center;
+		min-width: 350px;
+		overflow: auto;
+		transition: all 200ms ease-in-out;
 	}
 
 	.navbar {
-		width: 800px;
-		margin: 20px auto 20px;
+		min-width: 350px;
+		overflow: auto;
+
+		margin: unit(3) auto;
 		height: 50px;
 
 		& ul {
@@ -46,21 +51,21 @@
 			}
 		}
 	}
+}
 
-
-	@media (max-width: 600px) {
-		h2 {
-			font-size: 26px;
-			line-height: 32px;
-		}
+@media (max-width: 600px) {
+	:host {
 
 		.navbar {
-			width: 400px;
-			margin: 10px auto 10px;
-		}
+			margin: unit(1) auto;
 
-		.li-item {
-			width: 80px;
+			& ul {
+
+				& .li-item {
+					width: 80px;
+					height: 40px;
+				}
+			}
 		}
 	}
 }

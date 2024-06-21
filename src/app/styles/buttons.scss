@@ -36,7 +36,7 @@
 
 .icon-button {
 	min-width: 30px;
-	height: 30px;
+	height: 40px;
 	padding: 5px;
 	border-radius: 50%;
 	border: none;
@@ -48,10 +48,16 @@
 
 @media (max-width: 600px) {
 	.button {
+		height: 40px;
 		min-width: 90px;
 	}
 
 	.button-ghost {
+		height: 40px;
 		min-width: 90px;
+	}
+
+	.icon-button {
+		height: 40px;
 	}
 }

@@ -33,6 +33,8 @@ label {
 	color: darkred;
 }
 
-.hint {
-
+@media (max-width: 600px) {
+	.input {
+		height: 40px;
+	}
 }
