@@ -1,6 +1,10 @@
 @import 'vars';
 @import 'utils';
 
+label {
+	margin-bottom: unit(0.5);
+}
+
 .input {
 	background-color: transparent;
 	border: .5px solid #676262;
@@ -11,7 +15,24 @@
 	-moz-appearance: textfield;
 	transition: all 200ms ease-in-out;
 
-	&:hover {
+	&.error {
+		border: 1px solid darkred;
+	}
+
+	&:focus {
+		outline: none;
+		background-color: #cfdade;
+	}
+
+	&:hover:not(.error) {
 		border: 1px solid $secondary-color;
 	}
+}
+
+.error-block {
+	color: darkred;
+}
+
+.hint {
+
 }

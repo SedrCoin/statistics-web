@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IWSLog } from '../../models/models';
 import { NgClass, NgStyle } from '@angular/common';
 import { MarketTypeEnum } from '../../services/page.service';
@@ -11,15 +11,11 @@ import { DataService } from '../../services/data.service';
 	templateUrl: './base-table.component.html',
 	styleUrl: './base-table.component.scss'
 })
-export class BaseTableComponent implements OnChanges {
+export class BaseTableComponent {
 	@Input({ required: true }) public marketType: MarketTypeEnum;
 	@Input({ required: true }) public logs: IWSLog[] = [];
 
 	constructor(private db: DataService) {}
-
-	public ngOnChanges(changes: SimpleChanges): void {
-		console.log('received new input logs: ', this.logs);
-	}
 
 	public deleteRow(log: IWSLog): void {
 		const index: number =  this.logs.findIndex((el: IWSLog): boolean => el.id === log.id);
@@ -29,6 +25,7 @@ export class BaseTableComponent implements OnChanges {
 	}
 
 	public getLink(ticker: string): string {
+		console.log('market type: ', this.marketType);
 		if (this.marketType === MarketTypeEnum.SPOT) {
 			return 'https://www.binance.com/en/trade/' + ticker + '?type=spot';
 		} else {

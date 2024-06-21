@@ -4,10 +4,9 @@ import { MainComponent } from './views/main/main.component';
 import { AuthGuard } from './services/auth.guard';
 
 export const routes: Routes = [
-	{ path: '', component: MainComponent },
-	// { path: 'main', component: BaseViewComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+	{ path: '', redirectTo: '/main', pathMatch: 'full' },
 	{ path: 'main', component: BaseViewComponent, pathMatch: 'full' },
+	// { path: 'main', component: BaseViewComponent, pathMatch: 'full', canActivate: [AuthGuard] },
 	{ path: 'welcome', component: MainComponent, pathMatch: 'full' },
-	{ path: '**', redirectTo: '/', pathMatch: 'full' }, // redirect to spot -> wildcard,
-
+	{ path: '**', redirectTo: '/main', pathMatch: 'full' }, // redirect to spot -> wildcard,
 ];

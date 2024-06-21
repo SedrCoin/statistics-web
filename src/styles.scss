@@ -45,6 +45,11 @@ body {
 	@extend %font-light;
 }
 
+hr {
+	margin: unit(1);
+	border-bottom: 0.5px solid $secondary-color;
+}
+
 @media (max-width: 600px) {
 	body {
 		font-size: $mobile-font-size;

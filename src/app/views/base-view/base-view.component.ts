@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { IConfigForm, RangeIntervalsEnum, WS_URLS } from '../../models/models';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WsService } from '../../services/ws-service.service';
 import { BinanceService } from '../../services/api.service';
 import { MESSAGES_STORAGE, RANGES_MESSAGES_STORAGE } from '../../models/storage';
@@ -28,7 +28,13 @@ import { MenuComponent } from '../menu/menu.component';
 export class BaseViewComponent implements OnInit {
 	@HostListener('document:click', ['$event'])
 	public closeDropdown(event: Event): void {
-		this.showList = false;
+		this.isShowWhiteList = false;
+		this.isShowBlacklist = false;
+	}
+
+	//close dropdown on click outside
+	public stopPropagation(event: Event): void {
+		event.stopPropagation();
 	}
 
 	public currentPage = ConfigPagesEnum.DIFF;
@@ -49,17 +55,20 @@ export class BaseViewComponent implements OnInit {
 	//dropdown
 	public allPairs: string[] = [];
 	public filteredPairs: string[] = [];
-	public selectedPairs: string[] = [];
-	public showList = false;
 
-	public blacklist: string = '';
-	public whitelist: string = '';
+	public selectedWhitelistPairs: string[] = [];
+	public selectedBlacklistPairs: string[] = [];
 
+	public isShowWhiteList = false;
+	public isShowBlacklist = false;
+
+	// common properties
 	private wsUrl: string;
-	private currentSection: MarketTypeEnum;
+	public currentSection: MarketTypeEnum;
+	public isPairsLoading = true;
 
 	public form = this.fb.group({
-		diff: [0.2, [Validators.required, Validators.min(1), Validators.max(100)]],
+		diff: [0.2, [Validators.required, Validators.min(0.0001), Validators.max(100)]],
 		time: [1, [Validators.required, Validators.min(1), Validators.max(100)]],
 
 		pair: [''],
@@ -119,7 +128,7 @@ export class BaseViewComponent implements OnInit {
 	}
 
 	public applyBLWL(): void {
-		this.userConfig.whitelist = [...this.selectedPairs];
+		this.userConfig.whitelist = [...this.selectedWhitelistPairs];
 	}
 
 	// dropDown func
@@ -128,6 +137,7 @@ export class BaseViewComponent implements OnInit {
 			.subscribe((data: any): void => {
 				this.allPairs = data.map((pair: { symbol: any; }) => pair.symbol).sort();
 				this.filteredPairs = [...this.allPairs];
+				this.isPairsLoading = false;
 			});
 	}
 
@@ -140,34 +150,70 @@ export class BaseViewComponent implements OnInit {
 		this.filterPairs(input.value);
 	}
 
-	public selectPair(pair: string): void {
-		if (!this.selectedPairs.includes(pair)) {
-			this.selectedPairs.push(pair);
+	public selectWhitelistPair(pair: string): void {
+		if (!this.selectedWhitelistPairs.includes(pair)) {
+			this.allPairs = this.allPairs.filter((coin: string): boolean => coin !== pair);
+			this.selectedWhitelistPairs.push(pair);
 			this.form.get('pair')?.setValue('');
+
 			this.filteredPairs = [...this.allPairs];
-			this.showList = false;
-			this.form.get('whitelist')?.reset();
+			this.isShowWhiteList = false;
+			this.form.controls.whitelist.setValue(this.selectedWhitelistPairs.join(', '));
 		}
 	}
 
-	public removePair(pair: string): void {
+	public onToggleWhitelistDropdown(): void {
+		this.isShowWhiteList = !this.isShowWhiteList;
+		if (this.isShowWhiteList && this.isShowBlacklist) {
+			this.isShowBlacklist = !this.isShowBlacklist;
+		}
+	}
+
+	public onToggleBlacklistDropdown(): void {
+		this.isShowBlacklist = !this.isShowBlacklist;
+		if (this.isShowBlacklist && this.isShowWhiteList) {
+			this.isShowWhiteList = !this.isShowWhiteList;
+		}
+	}
+
+	public removeWhitelistPair(pair: string): void {
 		if (!this.userConfig.whitelist) return;
 
-		this.selectedPairs = this.selectedPairs.filter((p: string): boolean => p !== pair);
+		this.selectedWhitelistPairs = this.selectedWhitelistPairs.filter((p: string): boolean => p !== pair);
 
 		const index = this.userConfig.whitelist.findIndex((el: string): boolean => el === pair);
 		if (index > -1) {
+			this.allPairs.push(this.userConfig.whitelist[index]);
 			this.userConfig.whitelist.splice(index, 1);
 		}
 	}
 
-	public showDropdown(): void {
-		this.showList = true;
+	public selectBlacklistPair(pair: string): void {
+		if (!this.selectedBlacklistPairs.includes(pair)) {
+			this.allPairs = this.allPairs.filter((coin: string): boolean => coin !== pair);
+			this.selectedBlacklistPairs.push(pair);
+			this.form.get('pair')?.setValue('');
+
+			this.filteredPairs = [...this.allPairs];
+			this.isShowBlacklist = false;
+			this.form.controls.blacklist.setValue(this.selectedBlacklistPairs.join(', '));
+		}
 	}
 
-	//close dropdown on click outside
-	public stopPropagation(event: Event): void {
-		event.stopPropagation();
+	public removeBlacklistPair(pair: string): void {
+		if (!this.userConfig.blacklist) return;
+
+		this.selectedBlacklistPairs = this.selectedBlacklistPairs.filter((p: string): boolean => p !== pair);
+
+		const index = this.userConfig.blacklist.findIndex((el: string): boolean => el === pair);
+		if (index > -1) {
+			this.allPairs.push(this.userConfig.blacklist[index]);
+			this.userConfig.blacklist.splice(index, 1);
+		}
+	}
+
+	public getControl(controlName: string): AbstractControl | null {
+		return this.form.get(controlName);
 	}
 
 	protected readonly MESSAGES_STORAGE = MESSAGES_STORAGE;
