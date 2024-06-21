@@ -113,6 +113,20 @@
 	padding: 10px 10px;
 }
 
+.filter-wrapper{
+	margin-top: 12px;
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	accent-color: #6e8993;
+	cursor: pointer;
+
+}
 
 .li-item {
 	position: relative;
@@ -158,6 +172,8 @@
 		cursor: pointer;
 		color: #6e8993;
 	}
+
+
 }
 
 //@-webkit-keyframes tracking-in-expand {

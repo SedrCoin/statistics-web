@@ -29,8 +29,8 @@
 				<span [ngClass]="{'caret-down': parseFloat( log.priceChanged) < 0, 'caret-up': parseFloat(log.priceChanged) > 0}"
 				> </span> {{ parseFloat( log.priceChanged) < 0 ?  Math.abs(parseFloat( log.priceChanged )) + '%' :  log.priceChanged }}
 			</td>
-			<td >{{log.prevPrice}} </td>
-			<td >{{log.curPrice}}</td>
+			<td >{{log.prevPrice}}$ </td>
+			<td >{{log.curPrice}}$ </td>
 			<td>{{log.time}}</td>
 			<td>{{log.interval}}s</td>
 			<td >{{log.diff}}%</td>

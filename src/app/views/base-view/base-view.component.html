@@ -166,8 +166,19 @@
 					<input class="input" formControlName="dotsAmount" id="dots-amount" placeholder="5" type="number">
 				}
 			}
+			
+			
+			
+			<div class="filter-wrapper">
+				<label> Filter only USDT pairs</label>
+				<input type="checkbox" (click)="filter()" >
+			</div>
+		
 		</form>
 
+		
+		
+		
 		<div class="btn-wrapper u-mt-l">
 			<button
 				(click)="startWs()"

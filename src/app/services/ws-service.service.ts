@@ -10,6 +10,7 @@ import {
 } from '../models/storage';
 import { IConfigForm, IRangeMessageLog, IWSLog, RangeIntervalsEnum, RANGES_DOTS } from '../models/models';
 import { MarketTypeEnum } from './page.service';
+import { FilterService } from './filter.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -18,10 +19,14 @@ export class WsService {
 	public isWsOn = false;
 	public userConfig: IConfigForm;
 
+
 	private websocket: WebSocket | null = null;
 	private marketType: MarketTypeEnum;
 	private ID = 0;
 
+
+	constructor(private f: FilterService) {
+	}
 	public launchWS(
 		isSpot: boolean,
 		wsUrl: string,
@@ -65,11 +70,14 @@ export class WsService {
 		}
 	}
 
+
 	public filterAndMakeModels(data: IWSMarketDataResponse[]): WSMarketData[] {
 		return data
 			.map((el: IWSMarketDataResponse): WSMarketData => new WSMarketData(el.s, el.p, el.P, el.c, el.E))
 			.filter((el: WSMarketData): boolean => (this.userConfig.whitelist && this.userConfig.whitelist.length > 0) ? this.userConfig.whitelist.includes(el.symbol) : true)
-			.filter((el: WSMarketData): boolean => (this.userConfig.blacklist && this.userConfig.blacklist.length > 0) ? !this.userConfig.blacklist.includes(el.symbol) : true);
+			.filter((el: WSMarketData): boolean => (this.userConfig.blacklist && this.userConfig.blacklist.length > 0) ? !this.userConfig.blacklist.includes(el.symbol) : true)
+
+			.filter((el: WSMarketData): boolean => (this.f.isfiltered) ? el.symbol.endsWith('USDT') : true );
 	}
 
 	private fillInStorageForRanges(coinData: WSMarketData): void {

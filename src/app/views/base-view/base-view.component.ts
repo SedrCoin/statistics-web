@@ -10,6 +10,7 @@ import { NgClass } from '@angular/common';
 import { RangesTableComponent } from '../ranges-table/ranges-table.component';
 import { MarketTypeEnum, PageService } from 'src/app/services/page.service';
 import { MenuComponent } from '../menu/menu.component';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
 	selector: 'app-base-view',
@@ -31,6 +32,7 @@ export class BaseViewComponent implements OnInit {
 		this.isShowWhiteList = false;
 		this.isShowBlacklist = false;
 	}
+
 
 	//close dropdown on click outside
 	public stopPropagation(event: Event): void {
@@ -86,7 +88,8 @@ export class BaseViewComponent implements OnInit {
 		private ws: WsService,
 		private fb: FormBuilder,
 		private binanceService: BinanceService,
-		private pageService: PageService
+		private pageService: PageService,
+		private f: FilterService
 	) {
 		this.pageService.currentPage$
 			.subscribe((section: MarketTypeEnum): void => {
@@ -217,6 +220,11 @@ export class BaseViewComponent implements OnInit {
 
 	public getControl(controlName: string): AbstractControl | null {
 		return this.form.get(controlName);
+	}
+
+
+	filter() {
+		this.f.filterUSDT()
 	}
 
 	protected readonly MESSAGES_STORAGE = MESSAGES_STORAGE;
