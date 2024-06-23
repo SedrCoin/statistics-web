@@ -1,0 +1,26 @@
+<nav class="menu">
+	<h3>Scanner Launcher</h3>
+
+	<div class="u-flex u-gap-m">
+		<button (click)="openModal()" class="button btn-start">Login</button>
+		<button routerLink="/app" class="button btn-start">Start</button>
+	</div>
+</nav>
+
+<main class="welcome-wrapper">
+
+	<h2>Powerful for Traders.</h2>
+	<h2>Fast for everyone.</h2>
+
+	<div class="welcome-text h4">
+		Bring blockchain to the people. Solana supports experiences for power users, new consumers, and everyone in between.
+	</div>
+
+	<div class="btn-wrapper">
+		<button (click)="openModal()" class="button">Get Started</button>
+		<button class="button-ghost">Read doc</button>
+	</div>
+
+</main>
+
+<app-modal [isOpen]="isModalOpen" (closeEvent)="closeModal()"/>

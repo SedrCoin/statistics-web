@@ -1,6 +1,7 @@
 @import '../../styles/vars';
 @import '../../styles/utils';
 @import '../../styles/typography';
+
 .modal-overlay {
 	display: flex;
 	align-items: center;
@@ -23,29 +24,27 @@
 	width: 430px;
 	max-width: 500px;
 	border-radius: 10px;
-	height: 600px
+	height: 400px;
 }
 
-
-.input-wrapper{
+.input-wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	gap: 40px;
-	margin: 40px 10px;
+	margin: 40px 0;
 }
-
 
 label {
 	position: absolute;
 	top: -20px;
 	left: 0px;
-	font-size:12px;
+	font-size: 12px;
 	font-weight: 600;
 }
 
-svg	{
+svg {
 	position: absolute;
 	cursor: pointer;
 	top: 8px;
@@ -53,8 +52,7 @@ svg	{
 	fill: #9d9b9b;
 }
 
-
-.divider{
+.divider {
 	text-align: center;
 	-moz-box-flex: 1;
 	font-weight: 600;
@@ -66,11 +64,10 @@ svg	{
 	text-transform: uppercase;
 	justify-content: center;
 	margin-top: 20px
-
-
 }
+
 .divider::after {
-	content: "";
+	content: '';
 	width: 100%;
 	border-top-style: solid;
 	border-top-width: 1px;
@@ -83,7 +80,7 @@ svg	{
 }
 
 .divider::before {
-	content: "";
+	content: '';
 	width: 100%;
 	border-top-style: solid;
 	border-top-width: 1px;
@@ -95,19 +92,17 @@ svg	{
 	align-items: center;
 }
 
-
-.btn-wrapper{
+.btn-wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
 }
 
-.btn-wrapper button{
-		width: 100%;
+.btn-wrapper button {
+	width: 100%;
 }
 
-.input-wrapper-password{
+.input-wrapper-password {
 	position: relative;
 	width: 100%;
 }
@@ -131,16 +126,11 @@ svg	{
 	cursor: pointer;
 }
 
-
-
-
-
 ul {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 12px;
-
 
 	& .li-item {
 		display: flex;
@@ -172,7 +162,6 @@ ul {
 	animation: scale-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
-
 @-webkit-keyframes scale-out-top {
 	0% {
 		-webkit-transform: scale(1);
@@ -189,6 +178,7 @@ ul {
 		opacity: 1;
 	}
 }
+
 @keyframes scale-out-top {
 	0% {
 		-webkit-transform: scale(1);
@@ -208,17 +198,13 @@ ul {
 
 
 @media (max-width: 600px) {
-	.modal-content{
+	.modal-content {
 		width: 100%;
 		height: 100%;
-		border-radius: 0px;
-
+		border-radius: 0;
 	}
 
 	.close {
 		position: sticky;
 	}
-
-
-
 }

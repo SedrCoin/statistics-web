@@ -223,8 +223,8 @@ export class BaseViewComponent implements OnInit {
 	}
 
 
-	filter() {
-		this.f.filterUSDT()
+	public filter(): void {
+		this.f.filterUSDT();
 	}
 
 	protected readonly MESSAGES_STORAGE = MESSAGES_STORAGE;
