@@ -1,0 +1,66 @@
+@import '../../styles/vars';
+@import '../../styles/utils';
+
+:host {
+	.menu {
+		width: 100%;
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 6px;
+		height: 70px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		position: sticky;
+		top: 0;
+		border-bottom: 1px solid rgba(0, 0, 0, .1019607843);
+
+		& ul {
+			list-style-type: none;
+		}
+	}
+
+	.welcome-wrapper {
+		max-width: 800px;
+		margin: unit(6) auto 0;
+		padding: 0 6px;
+		text-align: center;
+
+		& .welcome-text {
+			max-width: 600px;
+			margin: unit(6) auto 0;
+			line-height: calc($base-line-height * 2);
+			text-align: center;
+		}
+
+		& .btn-wrapper {
+			margin: unit(6) auto 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: unit(2);
+
+			& .btn-start {
+				height: 28px;
+				background-color: #4c96d2;
+			}
+		}
+	}
+}
+
+@media (max-width: 600px) {
+
+	:host {
+
+		.menu {
+
+			& .btn-start {
+				height: 30px;
+				min-width: 70px;
+				max-width: 70px;
+			}
+		}
+	}
+}
+
+

@@ -4,95 +4,79 @@ import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 
-
-
-
-
 @Component({
-  selector: 'app-modal',
-  standalone: true,
+	selector: 'app-modal',
+	standalone: true,
 	imports: [
 		RouterLink,
 		FormsModule,
 		NgClass,
-
 	],
-
-  templateUrl: './modal.component.html',
-  styleUrl: './modal.component.scss'
+	templateUrl: './modal.component.html',
+	styleUrl: './modal.component.scss'
 })
 export class ModalComponent {
+	@Input() isOpen: boolean = false;
+	@Output() closeEvent = new EventEmitter<void>();
 
-  isPasswordVisible: boolean = false;
+	public isPasswordVisible: boolean = false;
 
-  username: string = '';
-  password: string = '';
+	public username: string = '';
+	public password: string = '';
 
-  isSignIn = true;
-  isRegister  = false;
+	public isSignIn = true;
+	public isRegister = false;
 
-  @Input() isOpen: boolean = false;
-  @Output() closeEvent = new EventEmitter<void>();
+	constructor(
+		private authService: AuthService,
+		private router: Router
+	) {
+	}
 
+	public close(event?: MouseEvent): void {
+		if (event) {
+			event.stopPropagation();
+		}
+		this.closeEvent.emit();
+	}
 
-  constructor(private authService: AuthService, private router: Router) {}
+	public get passwordFieldType(): string {
+		return this.isPasswordVisible ? 'text' : 'password';
+	}
 
+	public togglePasswordVisibility(): void {
+		this.isPasswordVisible = !this.isPasswordVisible;
+	}
 
-  close(event?: MouseEvent) {
-    if (event) {
-      event.stopPropagation();
-    }
-    this.closeEvent.emit();
-  }
+	// login(): void {
+	//   if (this.authService.login(this.username, this.password)) {
+	//     this.close();
+	//     this.router.navigate(['/spot']);
+	//   } else {
+	//     alert('Invalid credentials');
+	//   }
+	// }
 
+	public toggleSignIn(): void {
+		this.isSignIn = true;
+		this.isRegister = false;
+	}
 
+	public toggleRegister(): void {
+		this.isRegister = true;
+		this.isSignIn = false;
+	}
 
-  get passwordFieldType(): string {
-    return this.isPasswordVisible ? 'text' : 'password';
-  }
+	public register(): void {
+		this.authService.register(this.username, this.password).subscribe((): void => {
+				this.router.navigateByUrl('/');
+			}
+		);
+	}
 
-  togglePasswordVisibility(): void {
-    this.isPasswordVisible = !this.isPasswordVisible;
-  }
-
-
-
-
-  // login(): void {
-  //   if (this.authService.login(this.username, this.password)) {
-  //     this.close();
-  //     this.router.navigate(['/spot']);
-  //   } else {
-  //     alert('Invalid credentials');
-  //   }
-  // }
-
-
-
-  toggleSignIn(): void {
-    this.isSignIn = true;
-    this.isRegister = false;
-  }
-
-  toggleRegister(): void {
-    this.isRegister = true;
-    this.isSignIn = false;
-  }
-
-
-  register() {
-    this.authService.register(this.username, this.password).subscribe( () => {
-          this.router.navigateByUrl('/');
-    }
-
-    )
-  }
-
-  login() {
-    this.authService.login(this.username, this.password).subscribe( () => {
-      this.router.navigate(['/main']);
-    })
-  }
-
-
+	public login(): void {
+		this.authService.login(this.username, this.password).subscribe((): void => {
+			this.router.navigate(['/main']);
+		});
+	}
 }
